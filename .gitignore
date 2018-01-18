@@ -1,0 +1,13 @@
+# Maven #
+/target/
+
+# Eclipse #
+/.checksums
+/.metadata
+/.project
+/.classpath
+/.settings/
+
+# MacOSX #
+.DS_Store
+/bin/
