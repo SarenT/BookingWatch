@@ -3,6 +3,18 @@
   <groupId>BookingWatch</groupId>
   <artifactId>BookingWatch</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <!-- Launch IzPack automatically -->
+  <packaging>izpack-jar</packaging>
+  <properties>
+    <!-- Installer variables -->
+    <staging.dir>${project.build.directory}/staging</staging.dir>
+    <info.appName>BookingWatch</info.appName>
+    <info.appsubpath>bookingwatch/standard</info.appsubpath>
+    <izpack.dir.app>${basedir}/src/main/izpack</izpack.dir.app>
+    <staging.dir.app>${staging.dir}/appfiles</staging.dir.app>
+  </properties>
+  
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
@@ -22,6 +34,21 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+	    <groupId>org.codehaus.izpack</groupId>
+	    <artifactId>izpack-maven-plugin</artifactId>
+	    <extensions>true</extensions>
+	    <configuration>
+	      <baseDir>${staging.dir.app}</baseDir>
+	      <installFile>${izpack.dir.app}/install.xml</installFile>
+	      <outputDirectory>${project.build.directory}</outputDirectory>
+	      <finalName>${project.build.finalName}</finalName>
+	      <enableOverrideArtifact>true</enableOverrideArtifact>
+	      <mkdirs>true</mkdirs>
+	      <autoIncludeUrl>false</autoIncludeUrl>
+	      <autoIncludeDevelopers>false</autoIncludeDevelopers>
+	    </configuration>
+	  </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -44,6 +71,11 @@
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-log4j12</artifactId>
 		<version>1.7.25</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.codehaus.izpack</groupId>
+	    <artifactId>izpack-maven-plugin</artifactId>
+    	<version>5.1.2</version>
 	</dependency>
   </dependencies>
 </project>
